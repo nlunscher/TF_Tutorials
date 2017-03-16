@@ -75,7 +75,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 sess.run(tf.initialize_all_variables())
 saver = tf.train.Saver()
 
-for i in range(1000):
+for i in range(20000):
   batch = mnist.train.next_batch(50)
   if i%100 == 0:
   	# run the test data without dropout (keepprob = 1)
@@ -86,19 +86,19 @@ for i in range(1000):
   train_step.run(feed_dict={x: batch[0], y_: batch[1], keep_prob: 0.5})
 
 
-test_accs = np.zeros(10)
-for i in range(10):
-	batch = mnist.test.next_batch(1000)
-	test_acc = accuracy.eval(feed_dict={
-        x:batch[0], y_: batch[1], keep_prob: 1.0})
-	test_accs[i] = test_acc
-	print i, " Test Accuracy: ", test_acc
+# test_accs = np.zeros(10)
+# for i in range(10):
+# 	batch = mnist.test.next_batch(1000)
+# 	test_acc = accuracy.eval(feed_dict={
+#         x:batch[0], y_: batch[1], keep_prob: 1.0})
+# 	test_accs[i] = test_acc
+# 	print i, " Test Accuracy: ", test_acc
 
-overall_test_acc = np.mean(test_accs)
-print "Overall Test Accuracy: ", overall_test_acc
+# overall_test_acc = np.mean(test_accs)
+# print "Overall Test Accuracy: ", overall_test_acc
 
-# print("test accuracy %g"%accuracy.eval(feed_dict={
-#     x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
+print("test accuracy %g"%accuracy.eval(feed_dict={
+    x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
 
 
 

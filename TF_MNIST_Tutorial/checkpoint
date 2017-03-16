@@ -1,0 +1,2 @@
+model_checkpoint_path: "mnist_expert_model.ckplt"
+all_model_checkpoint_paths: "mnist_expert_model.ckplt"
