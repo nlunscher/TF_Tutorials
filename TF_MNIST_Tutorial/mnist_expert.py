@@ -6,7 +6,11 @@ print "Program Starting..."
 import tensorflow as tf
 import numpy as np
 
+print "imported"
+
 sess = tf.InteractiveSession()
+
+print "Made Session"
 
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
@@ -29,6 +33,7 @@ def max_pool_2x2(x):
   return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
                         strides=[1, 2, 2, 1], padding='SAME')
 
+print "Made helper functions"
 
 # first layer convolution 5x5 patch, 32 features, 1 input channel
 W_conv1 = weight_variable([5, 5, 1, 32])
@@ -71,9 +76,12 @@ train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
+print "Initialize"
 
 sess.run(tf.initialize_all_variables())
 saver = tf.train.Saver()
+
+print "Training"
 
 for i in range(20000):
   batch = mnist.train.next_batch(50)
